@@ -32,8 +32,44 @@ function Header() {
                     />
                     <SearchIcon className="h-12 p-4 text-amazon" />
                 </div>
+
+                {/* Right */}
+                <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
+                    <div className="link">
+                        <p>Hello, Thunder!</p>
+                        <p className="font-extrabold md:text-sm">
+                            Account & Lists
+                        </p>
+                    </div>
+
+                    <div className="link">
+                        <p>Returns</p>
+                        <p className="font-extrabold md:text-sm">& Orders</p>
+                    </div>
+
+                    <div className="relative link flex items-center">
+                        <span className=" absolute top-0 right-0 md:right-10 badge">
+                            3
+                        </span>
+                        <ShoppingCartIcon className="h-10" />
+                        <p className="hidden md:inline font-extrabold md:text-sm mt-2">
+                            Basket
+                        </p>
+                    </div>
+                </div>
             </div>
-            {/* Bot nav */}
+
+            {/* Bottom nav */}
+            <div className="flex items-center space-x-3 p-2 pl-6 text-white bg-amazon-light text-xs sm:text-sm">
+                <p className="link flex items-center">
+                    <MenuIcon className="h-6 mr-1" />
+                    All
+                </p>
+                <p className="link">Prime Video</p>
+                <p className="link">Amazon Business</p>
+                <p className="link">Today&lsquo;s Deals</p>
+                <p className="link hidden lg:inline-flex">Features</p>
+            </div>
         </header>
     )
 }
