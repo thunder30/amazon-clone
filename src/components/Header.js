@@ -5,7 +5,7 @@ import {
     ShoppingCartIcon,
 } from '@heroicons/react/outline'
 
-function Header() {
+function Header({ categories }) {
     return (
         <header>
             {/* Top nav */}
@@ -68,7 +68,12 @@ function Header() {
                 <p className="link">Prime Video</p>
                 <p className="link">Amazon Business</p>
                 <p className="link">Today&lsquo;s Deals</p>
-                <p className="link hidden lg:inline-flex">Features</p>
+                {categories.map((category, i) => (
+                    <p key={i} className="link hidden lg:inline-flex">
+                        {category[0].toUpperCase() +
+                            category.slice(1, category.length)}
+                    </p>
+                ))}
             </div>
         </header>
     )
