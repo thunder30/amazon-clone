@@ -1,29 +1,17 @@
-import Head from 'next/head'
-import Header from '../components/Header'
 import Banner from '../components/Banner'
 import ProductFeed from '../components/ProductFeed'
+import Layout from '../components/Layout'
+import { useEffect } from 'react'
 
-export default function Home({ products, categories }) {
+export default function Home({ products }) {
     return (
-        <div className="bg-gray-100">
-            <Head>
-                <title>Amazon Clone App</title>
-                <meta
-                    name="description"
-                    content="This is an Amazon Clone application built by Thunder30"
-                />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+        <Layout>
+            {/* Banner */}
+            <Banner />
 
-            <Header categories={categories} />
-            <main className="max-w-screen-2xl mx-auto">
-                {/* Banner */}
-                <Banner />
-
-                {/* ProductFeed */}
-                <ProductFeed products={products} />
-            </main>
-        </div>
+            {/* ProductFeed */}
+            <ProductFeed products={products} />
+        </Layout>
     )
 }
 
@@ -31,13 +19,13 @@ export async function getServerSideProps(ctx) {
     const products = await fetch('https://fakestoreapi.com/products').then(
         (res) => res.json()
     )
-    const categories = await fetch(
-        'https://fakestoreapi.com/products/categories'
-    ).then((res) => res.json())
+
+    // const categories = await fetch(
+    //     'https://fakestoreapi.com/products/categories'
+    // ).then((res) => res.json())
     return {
         props: {
             products,
-            categories,
         },
     }
 }

@@ -9,6 +9,7 @@ function ProductFeed({ products }) {
             ))}
 
             <img
+                loading="lazy"
                 className="md:col-span-full"
                 src="/banner-discover.jpg"
                 alt="image product"
