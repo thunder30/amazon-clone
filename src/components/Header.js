@@ -26,9 +26,9 @@ function Header() {
     if (error) {
         console.log(`Error useSWR -> `, error)
     }
-    if (status === 'loading') {
-        return <div>Loading...!</div>
-    }
+    // if (status === 'loading') {
+    //     return <div>Loading...!</div>
+    // }
 
     return (
         <header>

@@ -2,14 +2,50 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import NumberFormat from 'react-number-format'
 import { useSelector } from 'react-redux'
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+
 import CheckoutProduct from '../components/CheckoutProduct'
 import Layout from '../components/Layout'
 import { selectItems, selectTotal } from '../slices/basketSlice'
+
+const stripePromise = loadStripe(process.env.stripe_public_key)
 
 function Checkout() {
     const items = useSelector(selectItems)
     const total = useSelector(selectTotal)
     const { data: session, status } = useSession()
+
+    const createCheckoutSession = async () => {
+        try {
+            const stripe = await stripePromise
+
+            // Call the backend to create a checkout session...
+            const checkoutSession = await axios.post(
+                '/api/create-checkout-session',
+                {
+                    items,
+                    email: session.user.email,
+                }
+            )
+
+            if (checkoutSession.status === 200) {
+                // Redirect user/customer to Stripe Checkout
+                const result = await stripe.redirectToCheckout({
+                    sessionId: checkoutSession.data.id,
+                })
+
+                if (result.error) {
+                    alert(result.error.message)
+                }
+            } else {
+                console.log(`Code status not is 200`)
+            }
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
     return (
         <Layout>
             <div className="flex">
@@ -51,11 +87,13 @@ function Checkout() {
                             </span>
                         </h2>
                         <button
+                            role="link"
                             disabled={!session}
                             className={`button mt-2 ${
                                 !session &&
                                 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'
                             }`}
+                            onClick={createCheckoutSession}
                         >
                             {!session
                                 ? ' Sign in to checkout'
