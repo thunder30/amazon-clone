@@ -48,9 +48,9 @@ function Checkout() {
 
     return (
         <Layout>
-            <div className="flex">
+            <div className="lg:flex">
                 {/* left side */}
-                <div className="flex-grow w-5 shadow-sm">
+                <div className="lg:flex-grow w-full shadow-sm">
                     <Image
                         src="/banner/Amazon-Prime-Banner.jpg"
                         alt="banner"

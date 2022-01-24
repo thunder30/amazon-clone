@@ -48,7 +48,7 @@ function CheckoutProduct({
             />
 
             {/* Midlle */}
-            <div className="col-span-3 mx-auto">
+            <div className="col-span-3 mx-auto px-2">
                 <p>{title}</p>
                 <div className="flex">
                     {Array(rating)
