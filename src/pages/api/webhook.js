@@ -54,7 +54,7 @@ export default async function handler(req, res) {
         switch (event.type) {
             case 'checkout.session.completed': {
                 const session = event.data.object
-                console.log(session)
+                console.log(`webhook event --> `, event)
                 //
                 return fulfillOrder(session)
                     .then(() => res.status(200))
